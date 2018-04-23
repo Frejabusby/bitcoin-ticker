@@ -1,6 +1,6 @@
 import React from "react"
 import { LineChart, Line, Tooltip, XAxis, YAxis, CartesianGrid, Legend } from "recharts"
-import { moment } from "moment"
+import moment from "moment"
 import openGdaxWebsocket from "../gdax-websocket"
 
 class App extends React.Component {
@@ -27,27 +27,45 @@ class App extends React.Component {
     }))
   }
 
-dateFormat = () => {
-  moment(new Date()).format("hh:mm:ss")
-	// moment(time).format("HH:mm")
-}
+  dateFormat = () => {
+    const test = moment().format("HH:mm:ss")
+    return test
+  }
 
   render() {
     return (
       <div>
-        <LineChart width={700} height={500} data={this.state.tickerMessages}>
-          <CartesianGrid strokeDasharray="1 3" />
-          <XAxis dataKey="time" tickFormatter={this.dateFormat} />
-          <YAxis type="number" domain={["auto", "auto"]} />
+        <LineChart
+          width={700}
+          height={500}
+          data={this.state.tickerMessages}
+          margin={{ top: 50, right: 30, left: 0, bottom: 0 }}>
+          <CartesianGrid
+            strokeDasharray="1 3" />
+          <XAxis
+            dataKey={this.test}
+            tickFormatter={this.dateFormat} />
+          <YAxis
+            type="number"
+            domain={["auto", "auto"]} />
           <Tooltip />
-          <Legend verticalAlign="bottom" height={36} />
-          <Line type="natural" dataKey="price" stroke="#FF765F" animationEasing="ease-in" />
-          <Line type="natural" dataKey="best_bid" stroke="#85B29F" animationEasing="ease-in" />
+          <Legend
+            verticalAlign="bottom"
+            height={36} />
+          <Line
+            type="natural"
+            dataKey="price"
+            stroke="#FF765F"
+            animationEasing="ease-in" />
+          <Line
+            type="natural"
+            dataKey="best_bid"
+            stroke="#85B29F"
+            animationEasing="ease-in" />
         </LineChart>
       </div>
     )
   }
-
 }
 
 export default App
